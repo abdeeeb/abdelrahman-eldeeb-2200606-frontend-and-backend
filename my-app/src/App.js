@@ -10,11 +10,30 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <h1>Car Rental Management</h1>
-      <RegistrationForm />
-      <LoginForm />
-      <CarList />
-      <AddCarForm />
+      <header>
+        <h1>Car Rental Management</h1>
+      </header>
+      <main>
+        <section>
+          <h2>Registration</h2>
+          <RegistrationForm />
+        </section>
+        
+        <section>
+          <h2>Login</h2>
+          <LoginForm />
+        </section>
+        
+        <section>
+          <h2>Available Cars</h2>
+          <CarList />
+        </section>
+
+        <section>
+          <h2>Add a New Car</h2>
+          <AddCarForm />
+        </section>
+      </main>
     </div>
   );
 }
