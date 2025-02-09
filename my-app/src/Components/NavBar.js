@@ -3,7 +3,7 @@ import { useAuth } from '../AuthContext';
 import './NavBar.css';
 
 const NavBar = ({ navigate }) => {
-  const { isLoggedIn, logout } = useAuth(); // Get authentication state and logout function
+  const { isLoggedIn, isAdmin, logout } = useAuth();
 
   return (
     <nav className="nav-container">
@@ -17,7 +17,7 @@ const NavBar = ({ navigate }) => {
               <button className="nav-button" onClick={() => navigate('LoginForm')}>Login</button>
             </li>
             <li className="nav-item">
-              <button className="nav-button" onClick={() => navigate('RegistrationForm')}>Register</button>
+              <button className="nav-button" onClick={() => navigate('RegistrationForm')}>Registration</button>
             </li>
           </>
         ) : (
@@ -25,6 +25,11 @@ const NavBar = ({ navigate }) => {
             <li className="nav-item">
               <button className="nav-button" onClick={() => navigate('CarList')}>View Cars</button>
             </li>
+            {isAdmin && (
+              <li className="nav-item">
+                <button className="nav-button" onClick={() => navigate('AddCarForm')}>Add Car</button>
+              </li>
+            )}
             <li className="nav-item">
               <button className="nav-button" onClick={logout}>Logout</button>
             </li>
