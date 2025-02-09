@@ -1,14 +1,11 @@
 import React, { createContext, useState, useContext } from 'react';
 
-// Create authentication context
 export const AuthContext = createContext();
 
-// Custom hook to use AuthContext
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// AuthProvider Component
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -26,6 +23,14 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
     setIsAdmin(false);
     setToken(null);
+
+    // Remove authentication cookie from backend
+    fetch('http://localhost:5555/user/logout', {
+      method: 'POST',
+      credentials: 'include' // Ensures cookies are sent
+    }).then(() => {
+      console.log('Logged out successfully');
+    }).catch(err => console.error('Logout failed:', err));
   };
 
   return (
