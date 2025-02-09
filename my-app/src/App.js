@@ -20,9 +20,9 @@ function App() {
 
       {/* Conditional Rendering */}
       {currentScene === 'home' && <h2>Welcome to Car Rental Service</h2>}
-      {currentScene === 'register' && <RegistrationForm />}
+      {currentScene === 'register' && <RegistrationForm navigate={navigate} />}
       {currentScene === 'login' && <LoginForm navigate={navigate} />}
-      {currentScene === 'car-list' && <CarList />}
+      {currentScene === 'car-list' && <CarList navigate={navigate} />}
       {currentScene === 'add-car' && <AddCarForm navigate={navigate} />}
     </div>
   );
