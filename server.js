@@ -82,27 +82,6 @@ server.get('/cars', verifyToken, (req, res) => {
     });
 });
 
-// Rent a car
-server.post('/cars/rent/:id', verifyToken, (req, res) => {
-    const carID = req.params.id;
-    const userID = req.userDetails.id;
-    const rentDate = new Date().toISOString().split('T')[0];
-
-    db.get(`SELECT * FROM CARS WHERE ID=? AND AVAILABLE=1`, [carID], (err, row) => {
-        if (!row) return res.status(400).send('Car not available');
-
-        db.run(`INSERT INTO RENTALS (USER_ID, CAR_ID, RENT_DATE) VALUES (?, ?, ?)`, 
-            [userID, carID, rentDate], (err) => {
-                if (err) return res.status(500).send(err);
-
-                db.run(`UPDATE CARS SET AVAILABLE=0 WHERE ID=?`, [carID], (err) => {
-                    if (err) return res.status(500).send(err);
-                    res.status(200).send('Car rented successfully');
-                });
-            });
-    });
-});
-
 server.listen(port, () => {
     console.log(`Server started at port ${port}`);
 });
