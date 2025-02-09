@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
+import { useAuth } from '../AuthContext'; // Import Auth context
 
 const AddCarForm = ({ navigate }) => {
+  const { isLoggedIn } = useAuth(); // Get auth status
+
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
 
+  if (!isLoggedIn){
+    console.log('You must be logged in as admin to add cars.');
+    return <p>You must be logged in as admin to add cars.</p>;
+  }
+
   const addCar = () => {
     fetch('http://localhost:555/cars/addcar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ brand, model, year, price }),
-      credentials: "include"
+      credentials: 'include',
     })
       .then((response) => {
         if (!response.ok) {
@@ -20,7 +28,6 @@ const AddCarForm = ({ navigate }) => {
         }
         setMessage('Car added successfully');
         alert('Car added successfully');
-        navigate('car-list'); // Navigate to Car List after successful addition
       })
       .catch((error) => {
         setMessage(`Error: ${error.message}`);
