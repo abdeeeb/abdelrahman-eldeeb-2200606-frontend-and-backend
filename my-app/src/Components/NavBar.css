@@ -1,30 +1,51 @@
-nav {
+/* Navbar container */
+.nav-container {
     display: flex;
-    background-color: black;
-    color: white;
     justify-content: space-between;
     align-items: center;
+    background-color: black;
     padding: 10px 20px;
+    color: white;
 }
 
-li {
-    display: inline;
-    margin: 8px;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
+/* Logo styling */
 .logo {
-    cursor: pointer;
-    text-align: center;
-    margin: 8px;
+    font-size: 1.5rem;
     font-weight: bold;
-    font-size: 1.2rem;
+    cursor: pointer;
 }
 
-li:hover {
+.logo:hover {
+    color: aqua;
+}
+
+/* Navigation list */
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation items */
+.nav-item {
+    display: inline;
+}
+
+/* Buttons inside navbar */
+.nav-button {
+    background: transparent;
+    border: 2px solid aqua;
+    color: white;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-button:hover {
     background-color: aqua;
-    color: blue;
+    color: black;
 }

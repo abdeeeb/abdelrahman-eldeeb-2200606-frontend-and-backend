@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddCarForm = () => {
+const AddCarForm = ({ navigate }) => {
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
@@ -20,6 +20,7 @@ const AddCarForm = () => {
         }
         setMessage('Car added successfully');
         alert('Car added successfully');
+        navigate('car-list'); // Navigate to Car List after successful addition
       })
       .catch((error) => {
         setMessage(`Error: ${error.message}`);

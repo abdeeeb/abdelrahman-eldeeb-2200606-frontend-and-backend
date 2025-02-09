@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar';
 import RegistrationForm from './Components/RegistrationForm';
@@ -7,33 +7,23 @@ import AddCarForm from './Components/AddCarForm';
 import CarList from './Components/CarList';
 
 function App() {
+  const [currentScene, setCurrentScene] = useState('home');
+
+  const navigate = (scene) => {
+    setCurrentScene(scene);
+  };
+
   return (
     <div className="App">
-      <NavBar />
-      <header>
-        <h1>Car Rental Management</h1>
-      </header>
-      <main>
-        <section>
-          <h2>Registration</h2>
-          <RegistrationForm />
-        </section>
-        
-        <section>
-          <h2>Login</h2>
-          <LoginForm />
-        </section>
-        
-        <section>
-          <h2>Available Cars</h2>
-          <CarList />
-        </section>
+      <NavBar navigate={navigate} />
+      <h1>Car Rental Management</h1>
 
-        <section>
-          <h2>Add a New Car</h2>
-          <AddCarForm />
-        </section>
-      </main>
+      {/* Conditional Rendering */}
+      {currentScene === 'home' && <h2>Welcome to Car Rental Service</h2>}
+      {currentScene === 'register' && <RegistrationForm />}
+      {currentScene === 'login' && <LoginForm navigate={navigate} />}
+      {currentScene === 'car-list' && <CarList />}
+      {currentScene === 'add-car' && <AddCarForm navigate={navigate} />}
     </div>
   );
 }
