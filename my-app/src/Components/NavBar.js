@@ -4,27 +4,27 @@ import './NavBar.css';
 const NavBar = ({ navigate }) => {
   return (
     <nav className="nav-container">
-      <div className="logo" onClick={() => navigate('home')}>
+      <div className="logo" onClick={() => navigate('Home')}>
         Car Rental
       </div>
       <ul className="nav-list">
         <li className="nav-item">
-          <button className="nav-button" onClick={() => navigate('login')}>
+          <button className="nav-button" onClick={() => navigate('LoginForm')}>
             Login
           </button>
         </li>
         <li className="nav-item">
-          <button className="nav-button" onClick={() => navigate('register')}>
+          <button className="nav-button" onClick={() => navigate('RegisterationForm')}>
             Register
           </button>
         </li>
         <li className="nav-item">
-          <button className="nav-button" onClick={() => navigate('car-list')}>
+          <button className="nav-button" onClick={() => navigate('CarList')}>
             View Cars
           </button>
         </li>
         <li className="nav-item">
-          <button className="nav-button" onClick={() => navigate('add-car')}>
+          <button className="nav-button" onClick={() => navigate('AddCarForm')}>
             Add Car
           </button>
         </li>

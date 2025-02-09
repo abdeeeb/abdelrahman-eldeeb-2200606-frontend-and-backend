@@ -1,42 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../AuthContext'; // Import Auth context
 
 const LoginForm = ({ navigate }) => {
-  let email = '';
-  let password = '';
-  let message = '';
+  const { login } = useAuth(); // Get login function
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const loginUser = async () => {
-    try {
-      const response = await fetch('http://localhost:555/user/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-
-      if (!response.ok) {
-        throw new Error('Invalid credentials');
-      }
-
-      const userData = await response.json();
-      if (userData.admin === 1) navigate("add-car");
-      else navigate("home");
-    } catch (error) {
-      message = error.message;
-      alert(message);
-    }
+  const handleLogin = () => {
+    fetch('http://localhost:555/user/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.token) {
+          login(data.token, data.isAdmin);
+          alert('Login successful');
+          navigate('home');
+        } else {
+          alert('Invalid login');
+        }
+      })
+      .catch((error) => alert('Error: ' + error.message));
   };
 
   return (
-    <div className="form-section">
-      <h3>User Login</h3>
-      <form>
-        <input type="email" placeholder="Email" onChange={(e) => (email = e.target.value)} required />
-        <br />
-        <input type="password" placeholder="Password" onChange={(e) => (password = e.target.value)} required />
-        <br />
-        <button type="button" onClick={loginUser}>Login</button>
-      </form>
-      <p>{message}</p>
+    <div>
+      <h3>Login</h3>
+      <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+      <br />
+      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+      <br />
+      <button type="button" onClick={handleLogin}>Login</button>
     </div>
   );
 };
