@@ -19,7 +19,7 @@ const RegistrationForm = ({ navigate }) => {
       }
 
       setMessage('Registration successful! You can now log in.');
-      alert('Registration successful!');
+      alert('Registration successful!, Login to continue');
       navigate('login'); // Redirect user to login page
     } catch (error) {
       setMessage(error.message);
